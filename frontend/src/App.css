@@ -1,0 +1,154 @@
+/* ============================= */
+/* FESTNEST LUXURY DARK THEME */
+/* ============================= */
+
+/* Fonts (Add in index.html also - I’ll tell you below) */
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0F0A04;
+    color: #F5EFE6;
+    font-family: 'Jost', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5 {
+    font-family: 'Cormorant Garamond', serif;
+    color: #F5EFE6;
+    letter-spacing: 1px;
+}
+
+/* Labels */
+label {
+    color: #C8A050;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 12px;
+}
+
+/* Links */
+a {
+    color: #C8A050;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #E8C880;
+}
+
+/* ============================= */
+/* BUTTONS */
+/* ============================= */
+
+.btn-primary {
+    background-color: #C8A050;
+    color: #0F0A04;
+    padding: 10px 20px;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #E8C880;
+    transform: translateY(-2px);
+}
+
+.btn-ghost {
+    background: rgba(245, 239, 230, 0.2);
+    border: 1px solid rgba(200, 160, 80, 0.4);
+    color: #F5EFE6;
+    padding: 10px 20px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-ghost:hover {
+    border-color: #C8A050;
+}
+
+/* ============================= */
+/* CARDS */
+/* ============================= */
+
+.card {
+    background-color: #2D1F0A;
+    border-radius: 4px;
+    padding: 20px;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+    transition: 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    border: 1px solid rgba(200,160,80,0.3);
+}
+
+/* ============================= */
+/* INPUTS */
+/* ============================= */
+
+input, select, textarea {
+    background-color: #1A1008;
+    border: 1px solid rgba(200,160,80,0.3);
+    color: #F5EFE6;
+    padding: 10px;
+    border-radius: 4px;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #C8A050;
+    box-shadow: 0 0 0 2px rgba(200,160,80,0.2);
+}
+
+/* ============================= */
+/* SECTION SPACING */
+/* ============================= */
+
+.section {
+    padding: 120px 20px;
+}
+
+/* ============================= */
+/* TABLES */
+/* ============================= */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #1A1008;
+}
+
+th {
+    color: #C8A050;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    padding: 12px;
+}
+
+td {
+    padding: 12px;
+    border-top: 1px solid rgba(200,160,80,0.2);
+}
+
+tr:hover {
+    background-color: #3D2C12;
+}
+
+/* ============================= */
+/* STATUS COLORS */
+/* ============================= */
+
+.success {
+    color: #3DD68C;
+}
+
+.error {
+    color: #E05B5B;
+}
