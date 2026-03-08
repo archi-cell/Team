@@ -1,0 +1,352 @@
+/* ===============================
+   FestNest — Event Hotels
+   Ultra Luxury Edition
+   =============================== */
+
+@keyframes pageFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeRise   { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes cardRise   { from { opacity: 0; transform: translateY(36px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+/* ── Page Shell ── */
+.event-hotels-page {
+    min-height: 100vh;
+    padding: 100px 100px 140px;
+    background: #0B0703;
+    color: #F5EFE6;
+    font-family: "Jost", sans-serif;
+    position: relative;
+    overflow-x: hidden;
+
+    /* 6-layer gold atmosphere */
+    background-image:
+        radial-gradient(ellipse at 50% 0%,   rgba(200,160,80,0.12) 0%, transparent 45%),
+        radial-gradient(ellipse at 18% 30%,  rgba(180,130,50,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 82% 70%,  rgba(200,160,80,0.07) 0%, transparent 45%),
+        radial-gradient(ellipse at 50% 100%, rgba(200,160,80,0.10) 0%, transparent 50%),
+        radial-gradient(ellipse at 0%   55%, rgba(160,110,40,0.06) 0%, transparent 40%),
+        radial-gradient(ellipse at 100% 45%, rgba(160,110,40,0.06) 0%, transparent 40%);
+
+    animation: pageFadeIn 0.8s ease both;
+}
+
+/* ── Fixed noise grain ── */
+.event-hotels-page::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.030;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ── Drifting dual orb ── */
+.event-hotels-page::after {
+    content: '';
+    position: fixed;
+    top: -20%; left: -20%;
+    width: 140%; height: 140%;
+    background:
+        radial-gradient(ellipse at 40% 35%, rgba(200,160,80,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 68% 65%, rgba(180,130,50,0.05) 0%, transparent 45%);
+    pointer-events: none;
+    z-index: 0;
+    animation: glowDrift 12s ease-in-out infinite alternate;
+}
+
+@keyframes glowDrift {
+    from { transform: translate(0,    0)    scale(1);    opacity: 0.7; }
+    to   { transform: translate(38px, 24px) scale(1.05); opacity: 1;   }
+}
+
+/* Keep content above pseudo layers */
+.event-hotels-page > * { position: relative; z-index: 1; }
+
+/* ── Page Title Block ── */
+.event-hotels-page h2 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(34px, 4vw, 52px);
+    font-weight: 300;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+    animation: fadeRise 0.9s ease both;
+    text-shadow:
+        0 0 60px rgba(200,160,80,0.18),
+        0 2px 6px rgba(0,0,0,0.5);
+}
+
+/* Auto-generated gold eyebrow */
+.event-hotels-page h2::before {
+    content: 'Venues For Your Occasion';
+    display: block;
+    font-family: 'Jost', sans-serif;
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #C8A050;
+    text-shadow: 0 0 16px rgba(200,160,80,0.4);
+    margin-bottom: 14px;
+    animation: fadeRise 0.9s ease 0.05s both;
+}
+
+/* Animated gold rule beneath title */
+.event-hotels-page h2::after {
+    content: '';
+    display: block;
+    width: 64px;
+    height: 1px;
+    background: linear-gradient(to right, #C8A050, transparent);
+    margin-top: 18px;
+    margin-bottom: 44px;
+    box-shadow: 0 0 10px rgba(200,160,80,0.4);
+    animation: ruleGrow 1s ease 0.3s both;
+    transform-origin: left;
+}
+
+@keyframes ruleGrow {
+    from { transform: scaleX(0); opacity: 0; }
+    to   { transform: scaleX(1); opacity: 1; }
+}
+
+/* ── Hotels Grid ── */
+.event-hotels-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 28px;
+}
+
+/* ── Hotel Card ── */
+.event-hotel-card {
+    background: linear-gradient(160deg, #2A1C08 0%, #221508 100%);
+    padding: 0;
+    border-radius: 4px;
+    border: 1px solid rgba(200,160,80,0.18);
+    box-shadow:
+        0 24px 80px rgba(0,0,0,0.55),
+        0  0   0 1px rgba(200,160,80,0.06);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.45s cubic-bezier(0.22,1,0.36,1),
+                border-color 0.4s ease,
+                box-shadow 0.45s ease;
+
+    animation: cardRise 0.75s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+.event-hotel-card:nth-child(1) { animation-delay: 0.05s; }
+.event-hotel-card:nth-child(2) { animation-delay: 0.15s; }
+.event-hotel-card:nth-child(3) { animation-delay: 0.25s; }
+.event-hotel-card:nth-child(4) { animation-delay: 0.35s; }
+.event-hotel-card:nth-child(5) { animation-delay: 0.45s; }
+.event-hotel-card:nth-child(6) { animation-delay: 0.55s; }
+
+/* Gold top-border reveal */
+.event-hotel-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right,
+        transparent,
+        rgba(200,160,80,0.6),
+        rgba(240,200,100,0.9),
+        rgba(200,160,80,0.6),
+        transparent
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 2;
+    box-shadow: 0 0 16px rgba(200,160,80,0.5), 0 0 40px rgba(200,160,80,0.2);
+}
+
+/* Diagonal shimmer */
+.event-hotel-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -130%;
+    width: 80%; height: 100%;
+    background: linear-gradient(to right,
+        transparent,
+        rgba(220,175,85,0.06),
+        rgba(240,200,100,0.04),
+        transparent
+    );
+    transform: skewX(-12deg);
+    transition: left 0.7s cubic-bezier(0.22,1,0.36,1);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Hover */
+.event-hotel-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(200,160,80,0.40);
+    box-shadow:
+        0 36px 90px  rgba(0,0,0,0.65),
+        0  0   50px  rgba(200,160,80,0.08),
+        0  0   0 1px rgba(200,160,80,0.15),
+        inset 0 0 60px rgba(200,160,80,0.02);
+}
+
+.event-hotel-card:hover::before { opacity: 1; }
+.event-hotel-card:hover::after  { left: 160%; }
+
+/* ── Event Hotel Image ── */
+.event-hotel-image {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    border-radius: 4px 4px 0 0;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.22,1,0.36,1), filter 0.5s ease;
+    filter: brightness(0.82) saturate(0.85);
+}
+
+.event-hotel-card:hover .event-hotel-image {
+    transform: scale(1.05);
+    filter: brightness(1) saturate(1.08);
+}
+
+/* ── Card Body ── */
+.event-hotel-card-body {
+    padding: 22px 22px 24px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Hotel Name ── */
+.event-hotel-card h3 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: #F0E8D8;
+    margin-bottom: 12px;
+    letter-spacing: 0.1px;
+    line-height: 1.2;
+    transition: color 0.3s ease, letter-spacing 0.3s ease, text-shadow 0.3s ease;
+}
+
+.event-hotel-card:hover h3 {
+    color: #FAF2E4;
+    letter-spacing: 0.3px;
+    text-shadow: 0 0 24px rgba(200,160,80,0.14);
+}
+
+/* ── Location ── */
+.event-hotel-card p:first-of-type {
+    color: #C8A050;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.3px;
+    text-shadow: 0 0 10px rgba(200,160,80,0.2);
+}
+
+/* ── Description ── */
+.event-hotel-card p {
+    color: #A89878;
+    line-height: 1.7;
+    font-size: 13px;
+    font-weight: 300;
+    margin: 3px 0;
+    transition: color 0.3s ease;
+}
+
+.event-hotel-card:hover p { color: #BCA888; }
+
+/* ── Event Capacity / Info sections ── */
+.event-hotel-details {
+    margin-top: 14px;
+    padding-top: 14px;
+    position: relative;
+}
+
+/* Gradient divider line */
+.event-hotel-details::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, rgba(200,160,80,0.3), transparent);
+    box-shadow: 0 0 8px rgba(200,160,80,0.12);
+}
+
+.event-hotel-details h4 {
+    color: #C8A050;
+    margin-bottom: 8px;
+    font-family: "Jost", sans-serif;
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-shadow: 0 0 12px rgba(200,160,80,0.25);
+}
+
+/* ── Book Event Button ── */
+.book-event-btn {
+    margin-top: 16px;
+    padding: 13px 28px;
+    border: none;
+    border-radius: 2px;
+    background: linear-gradient(110deg, #B8902A 0%, #D4AA50 40%, #E8C870 55%, #D4AA50 70%, #B8902A 100%);
+    background-size: 220% auto;
+    color: #0B0703;
+    font-family: "Jost", sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.3s ease;
+    box-shadow:
+        0  6px 24px rgba(200,160,80,0.28),
+        0  0   0 1px rgba(200,160,80,0.2),
+        inset 0  1px 0 rgba(255,255,255,0.22),
+        inset 0 -1px 0 rgba(0,0,0,0.15);
+    animation: btnSweep 5s linear infinite;
+}
+
+@keyframes btnSweep {
+    0%   { background-position: 0%   center; }
+    100% { background-position: 220% center; }
+}
+
+/* Shimmer sweep */
+.book-event-btn::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 55%; height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.22), transparent);
+    transform: skewX(-22deg);
+    transition: left 0.55s ease;
+    pointer-events: none;
+}
+
+.book-event-btn:hover::after { left: 170%; }
+
+.book-event-btn:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 12px 36px rgba(200,160,80,0.45),
+        0  0   0 1px rgba(220,180,90,0.4),
+        0  0  60px rgba(200,160,80,0.18),
+        inset 0 1px 0 rgba(255,255,255,0.28);
+}
+
+.book-event-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 14px rgba(200,160,80,0.25);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+    .event-hotels-page { padding: 80px 48px 100px; }
+}
+
+@media (max-width: 768px) {
+    .event-hotels-page { padding: 72px 24px 80px; }
+    .event-hotels-grid { grid-template-columns: 1fr; }
+}

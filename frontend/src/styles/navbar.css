@@ -1,0 +1,164 @@
+/* ===============================
+   FestNest Luxury Navbar
+   =============================== */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 20px 120px;
+
+    background: rgba(15, 10, 4, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border-bottom: 1px solid rgba(200, 160, 80, 0.15);
+
+    /* Slide down on page load */
+    animation: navbarSlideDown 0.7s ease both;
+
+    /* Subtle gold shimmer on the border-bottom */
+    background-image: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(200, 160, 80, 0.03) 50%,
+        transparent 100%
+    );
+}
+
+@keyframes navbarSlideDown {
+    from { opacity: 0; transform: translateY(-100%); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Animated gold line that runs across the bottom border on load */
+.navbar::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -100%;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(200, 160, 80, 0.5),
+        transparent
+    );
+    animation: borderSweep 1.4s ease 0.5s both;
+    pointer-events: none;
+}
+
+@keyframes borderSweep {
+    from { left: -100%; opacity: 0; }
+    to   { left: 100%;  opacity: 1; }
+}
+
+/* Brand Name */
+.navbar h2 {
+    font-family: "Cormorant Garamond", serif;
+    color: #F5EFE6;
+    letter-spacing: 3px;
+    font-size: 24px;
+    margin: 0;
+    /* Subtle brand glow on hover */
+    transition: text-shadow 0.4s ease;
+    cursor: default;
+    animation: fadeRise 0.8s ease 0.2s both;
+}
+
+.navbar h2:hover {
+    text-shadow: 0 0 20px rgba(200, 160, 80, 0.25);
+}
+
+@keyframes fadeRise {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Links Container */
+.nav-links {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    animation: fadeRise 0.8s ease 0.35s both;
+}
+
+/* Link Style */
+.nav-links a {
+    font-family: "Jost", sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+
+    color: #C4B89A;
+    text-decoration: none;
+
+    padding: 6px 0;
+
+    position: relative;
+    transition: color 0.3s ease, letter-spacing 0.3s ease;
+}
+
+/* Hover Effect — slight letter-spacing expansion + color */
+.nav-links a:hover {
+    color: #E8C880;
+    letter-spacing: 3.5px;
+}
+
+/* Gold Underline Animation */
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(to right, #C8A050, #E8C880);
+    transition: width 0.35s ease;
+    border-radius: 2px;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Dot indicator that fades in above the underline on hover */
+.nav-links a::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #C8A050;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.nav-links a:hover::before {
+    opacity: 0.7;
+    transform: translateX(-50%) translateY(-2px);
+}
+
+/* Optional Active Link Class */
+.nav-links a.active {
+    color: #C8A050;
+    border-left: 3px solid #C8A050;
+    padding-left: 8px;
+    /* Active link glows softly */
+    text-shadow: 0 0 12px rgba(200, 160, 80, 0.2);
+}
+
+/* Active link underline always visible */
+.nav-links a.active::after {
+    width: 100%;
+    opacity: 0.6;
+}

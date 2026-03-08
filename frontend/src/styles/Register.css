@@ -1,0 +1,218 @@
+/* ===============================
+   FestNest Register Page
+   =============================== */
+
+.register-page {
+    min-height: 100vh;
+    width: 100%;
+    background: #0F0A04;
+
+    /* Layered gold atmosphere */
+    background-image:
+        radial-gradient(ellipse at 50% 35%, rgba(200,160,80,0.10) 0%, transparent 58%),
+        radial-gradient(ellipse at 15% 85%, rgba(200,160,80,0.05) 0%, transparent 45%),
+        radial-gradient(ellipse at 88% 10%, rgba(200,160,80,0.05) 0%, transparent 40%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: "Jost", sans-serif;
+    position: relative;
+    overflow: hidden;
+
+    animation: pageFadeIn 0.6s ease both;
+}
+
+@keyframes pageFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Noise grain */
+.register-page::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.028;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Slow breathing glow behind the card */
+.register-page::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(200,160,80,0.07), transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+    animation: breathe 5s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    0%, 100% { transform: translate(-50%, -50%) scale(1);    opacity: 0.7; }
+    50%       { transform: translate(-50%, -50%) scale(1.12); opacity: 1;   }
+}
+
+/* ── Register Card ── */
+.register-card {
+    background: #2D1F0A;
+    padding: 52px 48px 48px;
+    width: min(420px, 90vw);
+
+    border-radius: 4px;
+    border: 1px solid rgba(200,160,80,0.25);
+
+    box-shadow:
+        0 24px 80px rgba(0,0,0,0.55),
+        0 0 0 1px rgba(200,160,80,0.04) inset;
+
+    position: relative;
+    z-index: 1;
+
+    /* Card rises up on load */
+    animation: cardRise 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+}
+
+@keyframes cardRise {
+    from { opacity: 0; transform: translateY(36px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+/* Gold gradient top line */
+.register-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #C8A050, transparent);
+    border-radius: 4px 4px 0 0;
+    /* Sweeps in on load */
+    animation: topLineSweep 1s ease 0.6s both;
+    transform-origin: left;
+}
+
+@keyframes topLineSweep {
+    from { transform: scaleX(0); opacity: 0; }
+    to   { transform: scaleX(1); opacity: 1; }
+}
+
+/* ── Heading ── */
+.register-card h2 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 38px;
+    font-weight: 300;
+    color: #F5EFE6;
+    margin-bottom: 36px;
+    text-align: center;
+    letter-spacing: 0.5px;
+    animation: fadeRise 0.7s ease 0.3s both;
+}
+
+@keyframes fadeRise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Form Layout ── */
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    animation: fadeRise 0.7s ease 0.45s both;
+}
+
+/* ── Inputs + Select ── */
+.register-form input,
+.register-form select {
+    padding: 13px 16px;
+    border-radius: 4px;
+    border: 1px solid rgba(200,160,80,0.25);
+    background: #1A1008;
+    color: #F5EFE6;
+    font-family: "Jost", sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.register-form input::placeholder {
+    color: rgba(196,184,154,0.35);
+}
+
+.register-form select option {
+    background: #2D1F0A;
+    color: #F5EFE6;
+}
+
+/* Focus Effect */
+.register-form input:focus,
+.register-form select:focus {
+    border-color: #C8A050;
+    box-shadow: 0 0 0 3px rgba(200,160,80,0.08);
+    background: #1F1508;
+}
+
+/* ── Button ── */
+.register-btn {
+    margin-top: 10px;
+    padding: 15px;
+    border: none;
+    border-radius: 2px;
+    background: #C8A050;
+    color: #0F0A04;
+    font-family: "Jost", sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 32px rgba(200,160,80,0.2);
+}
+
+/* Shimmer sweep on button */
+.register-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(255,255,255,0.14),
+        transparent
+    );
+    transform: skewX(-20deg);
+    transition: left 0.5s ease;
+    pointer-events: none;
+}
+
+.register-btn:hover::after {
+    left: 160%;
+}
+
+/* Hover */
+.register-btn:hover {
+    background: #E8C880;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(200,160,80,0.35);
+}
+
+.register-btn:active {
+    transform: translateY(0px);
+    box-shadow: 0 4px 16px rgba(200,160,80,0.2);
+}

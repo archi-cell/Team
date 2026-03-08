@@ -1,0 +1,625 @@
+/* ===============================
+    FestNest — Ultra Luxury Hero
+   =============================== */
+
+@keyframes pageFadeIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeRise    { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes lineGrow    { from { transform: scaleX(0); opacity: 0; } to { transform: scaleX(1); opacity: 1; } }
+@keyframes slideInLeft { from { opacity: 0; transform: translateX(-32px); } to { opacity: 1; transform: translateX(0); } }
+
+/* ─────────────────────────────── HERO ─────────────────────────────── */
+
+.hero-section {
+    min-height: 100vh;
+    padding: 0 120px;
+    text-align: center;
+    background: #0B0703;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    /* 8-layer deep gold atmosphere */
+    background-image:
+        radial-gradient(ellipse at 50% 52%, rgba(220,175,85,0.26)  0%,  transparent 38%),
+        radial-gradient(ellipse at 50% 50%, rgba(200,160,80,0.16)  0%,  transparent 58%),
+        radial-gradient(ellipse at 50% 48%, rgba(160,110,40,0.10)  0%,  transparent 72%),
+        radial-gradient(ellipse at 50% 100%, rgba(200,160,80,0.14) 0%,  transparent 50%),
+        radial-gradient(ellipse at 50% 0%,   rgba(200,160,80,0.07) 0%,  transparent 42%),
+        radial-gradient(ellipse at 0%   60%, rgba(170,120,45,0.09) 0%,  transparent 45%),
+        radial-gradient(ellipse at 100% 40%, rgba(170,120,45,0.09) 0%,  transparent 45%),
+        radial-gradient(ellipse at 50% 70%, rgba(140,90,30,0.08)   0%,  transparent 60%);
+
+    animation: pageFadeIn 1s ease both;
+}
+
+/* ── Breathing dual-layer orb ── */
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 1200px; height: 1200px;
+    background:
+        radial-gradient(circle at 50% 50%,
+            rgba(235,185,90,0.22)  0%,
+            rgba(200,160,80,0.12) 22%,
+            rgba(180,140,60,0.06) 45%,
+            transparent           65%
+        );
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 0;
+    animation: orbBreath 7s ease-in-out infinite, orbDrift 18s ease-in-out infinite alternate;
+}
+
+@keyframes orbBreath {
+    0%, 100% { opacity: 0.75; transform: translate(-50%, -50%) scale(1);    }
+    50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.14); }
+}
+
+@keyframes orbDrift {
+    from { margin-left: -14px; margin-top: 0; }
+    to   { margin-left:  14px; margin-top: -16px; }
+}
+
+/* ── Vignette + grain ── */
+.hero-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 50% 50%, transparent 35%, rgba(0,0,0,0.72) 100%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: cover, 160px 160px;
+    opacity: 0.055;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ── Left & right chamber walls ── */
+.hero-wall-left,
+.hero-wall-right {
+    position: absolute;
+    top: 0; width: 40%; height: 100%;
+    pointer-events: none; z-index: 0;
+}
+.hero-wall-left  { left:  0; background: linear-gradient(to right, rgba(140,90,30,0.12), transparent); }
+.hero-wall-right { right: 0; background: linear-gradient(to left,  rgba(140,90,30,0.12), transparent); }
+
+/* ── Gold floor reflection ── */
+.hero-floor {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 200px;
+    background: linear-gradient(to top,
+        rgba(200,160,80,0.10) 0%,
+        rgba(200,160,80,0.04) 50%,
+        transparent           100%
+    );
+    pointer-events: none; z-index: 0;
+}
+
+/* ── Floating gold dust ── */
+.hero-particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 2;
+    background: radial-gradient(circle, rgba(255,215,100,0.95), rgba(200,160,80,0.15));
+    box-shadow: 0 0 5px rgba(240,200,90,0.8), 0 0 12px rgba(200,160,80,0.5);
+    animation: particleRise linear infinite;
+}
+
+@keyframes particleRise {
+    0%   { transform: translateY(0)      translateX(0)    scale(0.6); opacity: 0;   }
+    6%   { opacity: 1; }
+    40%  { transform: translateY(-40vh)  translateX(8px)  scale(1.1); opacity: 0.8; }
+    70%  { transform: translateY(-75vh)  translateX(-6px) scale(0.9); opacity: 0.5; }
+    100% { transform: translateY(-115vh) translateX(4px)  scale(0.5); opacity: 0;   }
+}
+
+/* ── Horizon glow bar ── */
+.hero-glow-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right,
+        transparent 0%,
+        rgba(200,160,80,0.3)  12%,
+        rgba(240,200,100,1)   50%,
+        rgba(200,160,80,0.3)  88%,
+        transparent           100%
+    );
+    z-index: 3;
+    pointer-events: none;
+    box-shadow:
+        0 0  14px rgba(240,200,90,0.65),
+        0 0  48px rgba(200,160,80,0.40),
+        0 0 110px rgba(200,160,80,0.18);
+    animation: glowBarPulse 4s ease-in-out infinite;
+}
+
+@keyframes glowBarPulse {
+    0%, 100% { opacity: 0.55; }
+    50%       { opacity: 1;   }
+}
+
+/* ── Decorative corner brackets ── */
+.hero-corner-tl, .hero-corner-br {
+    position: absolute;
+    width: 72px; height: 72px;
+    pointer-events: none; z-index: 2;
+    opacity: 0;
+    animation: cornerFadeIn 1.2s ease 1.1s both;
+}
+
+@keyframes cornerFadeIn { from { opacity: 0; } to { opacity: 0.38; } }
+
+.hero-corner-tl { top: 44px; left: 44px; border-top: 1px solid rgba(200,160,80,0.55); border-left: 1px solid rgba(200,160,80,0.55); }
+.hero-corner-br { bottom: 44px; right: 44px; border-bottom: 1px solid rgba(200,160,80,0.55); border-right: 1px solid rgba(200,160,80,0.55); }
+
+/* ── Eyebrow ── */
+.hero-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #C8A050;
+    position: relative; z-index: 1;
+    margin-bottom: 22px;
+    text-shadow: 0 0 20px rgba(200,160,80,0.55);
+    animation: fadeRise 1s ease 0.1s both;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+}
+
+.hero-eyebrow::before,
+.hero-eyebrow::after {
+    content: '';
+    display: inline-block;
+    width: 34px; height: 1px;
+    background: linear-gradient(to right, transparent, #C8A050);
+    box-shadow: 0 0 6px rgba(200,160,80,0.5);
+}
+.hero-eyebrow::before { transform: scaleX(-1); }
+
+/* ── Hero Heading ── */
+.hero-section h1 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(44px, 5.2vw, 76px);
+    font-weight: 300;
+    color: #F8F2E8;
+    margin-bottom: 0;
+    position: relative; z-index: 1;
+    letter-spacing: -1px;
+    line-height: 1.08;
+    animation: fadeRise 1.1s ease 0.2s both;
+    text-shadow:
+        0 0  30px rgba(235,185,90,0.30),
+        0 0  80px rgba(200,160,80,0.18),
+        0 0 180px rgba(200,160,80,0.10),
+        0 2px  6px rgba(0,0,0,0.55);
+}
+
+/* ── Vertical gold rule ── */
+.hero-divider {
+    width: 1px; height: 52px;
+    background: linear-gradient(to bottom, transparent, rgba(200,160,80,0.75), transparent);
+    margin: 28px auto;
+    position: relative; z-index: 1;
+    animation: dividerGrow 1s ease 0.5s both;
+    transform-origin: top;
+    box-shadow: 0 0 10px rgba(200,160,80,0.35);
+}
+
+@keyframes dividerGrow {
+    from { transform: scaleY(0); opacity: 0; }
+    to   { transform: scaleY(1); opacity: 1; }
+}
+
+/* ── Hero Paragraph ── */
+.hero-section p {
+    font-family: "Jost", sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: #C4B49A;
+    max-width: 580px;
+    margin: 0 auto 48px auto;
+    line-height: 1.9;
+    letter-spacing: 0.3px;
+    position: relative; z-index: 1;
+    animation: fadeRise 1.1s ease 0.45s both;
+}
+
+/* ── Button Row ── */
+.hero-buttons {
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    position: relative; z-index: 1;
+    animation: fadeRise 1.1s ease 0.65s both;
+}
+
+/* ── Base button ── */
+.hero-btn {
+    padding: 16px 42px;
+    font-size: 9px;
+    font-family: "Jost", sans-serif;
+    font-weight: 500;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative; overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.35s ease, color 0.35s ease;
+}
+
+.hero-btn::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 55%; height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.20), transparent);
+    transform: skewX(-22deg);
+    transition: left 0.6s ease;
+    pointer-events: none;
+}
+.hero-btn:hover::after { left: 170%; }
+
+/* Primary — animated gold sweep */
+.hero-btn-primary {
+    background: linear-gradient(110deg, #B8902A 0%, #D4AA50 30%, #F0D070 50%, #D4AA50 70%, #B8902A 100%);
+    background-size: 250% auto;
+    color: #0B0703;
+    border: none;
+    font-weight: 600;
+    box-shadow:
+        0  8px 28px  rgba(200,160,80,0.45),
+        0  0   0 1px rgba(200,160,80,0.35),
+        0  0  60px   rgba(200,160,80,0.18),
+        0  0 120px   rgba(200,160,80,0.08),
+        inset 0  1px 0 rgba(255,255,255,0.30),
+        inset 0 -1px 0 rgba(0,0,0,0.20);
+    animation: btnSweep 5s linear infinite;
+}
+
+@keyframes btnSweep {
+    0%   { background-position: 0%   center; }
+    100% { background-position: 250% center; }
+}
+
+.hero-btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 16px 52px  rgba(200,160,80,0.62),
+        0  0   0 1px rgba(220,180,90,0.55),
+        0  0  90px   rgba(200,160,80,0.28),
+        inset 0 1px 0 rgba(255,255,255,0.35);
+}
+.hero-btn-primary:active { transform: translateY(-1px); }
+
+/* Ghost */
+.hero-btn-ghost {
+    background: rgba(200,160,80,0.04);
+    color: #E8E0D0;
+    border: 1px solid rgba(200,160,80,0.22);
+    backdrop-filter: blur(8px);
+}
+
+.hero-btn-ghost:hover {
+    border-color: rgba(200,160,80,0.55);
+    color: #E8C870;
+    background: rgba(200,160,80,0.08);
+    transform: translateY(-3px);
+    box-shadow:
+        0 8px 28px rgba(200,160,80,0.12),
+        0 0 0 1px rgba(200,160,80,0.3),
+        inset 0 0 20px rgba(200,160,80,0.04);
+}
+.hero-btn-ghost:active { transform: translateY(-1px); }
+
+/* ── Scroll indicator ── */
+.hero-scroll {
+    position: absolute;
+    bottom: 32px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: fadeRise 1s ease 1.3s both;
+}
+
+.hero-scroll span {
+    font-family: 'Jost', sans-serif;
+    font-size: 7px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(200,160,80,0.5);
+}
+
+.hero-scroll-line {
+    width: 1px; height: 38px;
+    background: linear-gradient(to bottom, rgba(200,160,80,0.65), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+    0%, 100% { transform: scaleY(0.5) translateY(-8px); opacity: 0.4; }
+    50%       { transform: scaleY(1)   translateY(0);    opacity: 1;   }
+}
+
+
+/* ======================================
+    Why FestNest — Features Section
+   ====================================== */
+
+.features-section {
+    background: #0B0703;
+    padding: 110px 80px 130px;
+    position: relative;
+    overflow: hidden;
+    background-image:
+        radial-gradient(ellipse at 20% 0%,   rgba(200,160,80,0.10) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 100%, rgba(200,160,80,0.08) 0%, transparent 50%);
+}
+
+.features-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 28% 0%, rgba(200,160,80,0.10) 0%, transparent 55%);
+    pointer-events: none;
+    animation: featureGlowDrift 9s ease-in-out infinite alternate;
+}
+
+@keyframes featureGlowDrift {
+    from { transform: translateX(0)    translateY(0);    opacity: 0.75; }
+    to   { transform: translateX(50px) translateY(28px); opacity: 1;    }
+}
+
+.features-section::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; right: -80px;
+    width: 550px; height: 550px;
+    background: radial-gradient(circle, rgba(200,160,80,0.08) 0%, transparent 65%);
+    pointer-events: none;
+    animation: featureGlowDrift 12s ease-in-out infinite alternate-reverse;
+}
+
+/* Gold top rule */
+.features-top-line {
+    position: absolute;
+    top: 0; left: 8%; right: 8%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(200,160,80,0.38), transparent);
+    box-shadow: 0 0 14px rgba(200,160,80,0.22);
+}
+
+/* ── Eyebrow ── */
+.features-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    position: relative; z-index: 1;
+    animation: slideInLeft 0.9s ease 0.1s both;
+}
+
+.features-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #C8A050;
+    text-shadow: 0 0 22px rgba(200,160,80,0.50);
+}
+
+.features-eyebrow::after {
+    content: '';
+    display: inline-block;
+    width: 52px; height: 1px;
+    background: linear-gradient(to right, #C8A050, transparent);
+    opacity: 0.65;
+    margin-left: 14px;
+    vertical-align: middle;
+    box-shadow: 0 0 10px rgba(200,160,80,0.5);
+    animation: lineGrow 1s ease 0.4s both;
+    transform-origin: left;
+}
+
+/* ── Section Heading ── */
+.features-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 5.5vw, 72px);
+    font-weight: 300;
+    color: #F5EFE6;
+    line-height: 1.08;
+    margin: 0 0 72px 0;
+    letter-spacing: -0.8px;
+    position: relative; z-index: 1;
+    animation: fadeRise 1s ease 0.2s both;
+    text-shadow:
+        0 0 60px rgba(200,160,80,0.14),
+        0 2px 8px rgba(0,0,0,0.5);
+}
+
+.features-heading em {
+    font-style: italic;
+    background: linear-gradient(100deg,
+        #A07828 0%,
+        #C8A050 18%,
+        #F0D080 38%,
+        #FFE9A0 50%,
+        #F0D080 62%,
+        #C8A050 82%,
+        #A07828 100%
+    );
+    background-size: 280% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: goldShimmer 5s linear infinite;
+    filter: drop-shadow(0 0 18px rgba(200,160,80,0.55));
+}
+
+@keyframes goldShimmer {
+    from { background-position: 0%   center; }
+    to   { background-position: 280% center; }
+}
+
+/* ── Cards Grid ── */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid rgba(200,160,80,0.18);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative; z-index: 1;
+    box-shadow:
+        0 28px 90px  rgba(0,0,0,0.62),
+        0  0   80px  rgba(200,160,80,0.07),
+        0  0   0 1px rgba(200,160,80,0.08);
+}
+
+/* ── Single Feature Card ── */
+.feature-card {
+    background: linear-gradient(160deg, #2D1F0A 0%, #261808 100%);
+    padding: 48px 38px 52px;
+    border-right: 1px solid rgba(200,160,80,0.10);
+    position: relative; overflow: hidden;
+    transition: background 0.5s ease, transform 0.45s cubic-bezier(0.22,1,0.36,1), box-shadow 0.45s ease;
+    animation: fadeRise 0.85s ease both;
+}
+
+.feature-card:nth-child(1) { animation-delay: 0.08s; }
+.feature-card:nth-child(2) { animation-delay: 0.20s; }
+.feature-card:nth-child(3) { animation-delay: 0.32s; }
+.feature-card:nth-child(4) { animation-delay: 0.44s; }
+.feature-card:last-child    { border-right: none; }
+
+/* Gold top-border reveal */
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(to right, transparent, rgba(200,160,80,0.45), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    box-shadow: 0 0 18px rgba(200,160,80,0.6), 0 0 40px rgba(200,160,80,0.22);
+}
+
+/* Diagonal shimmer */
+.feature-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -130%;
+    width: 85%; height: 100%;
+    background: linear-gradient(to right,
+        transparent,
+        rgba(220,175,85,0.07),
+        rgba(240,200,100,0.04),
+        transparent
+    );
+    transform: skewX(-12deg);
+    transition: left 0.7s cubic-bezier(0.22,1,0.36,1);
+    pointer-events: none;
+}
+
+.feature-card:hover {
+    background: linear-gradient(160deg, #3D2C12 0%, #341F08 100%);
+    transform: translateY(-6px);
+    box-shadow:
+        0 22px 64px  rgba(0,0,0,0.52),
+        0  0   44px  rgba(200,160,80,0.09),
+        inset 0 0 50px rgba(200,160,80,0.03);
+}
+
+.feature-card:hover::before { opacity: 1; }
+.feature-card:hover::after  { left: 160%; }
+
+/* ── Icon Box ── */
+.feature-icon {
+    width: 54px; height: 54px;
+    background: linear-gradient(135deg, #1A1008, #221508);
+    border: 1px solid rgba(200,160,80,0.22);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 30px;
+    transition: all 0.35s ease;
+    box-shadow: inset 0 1px 0 rgba(200,160,80,0.08);
+}
+
+.feature-card:hover .feature-icon {
+    border-color: rgba(200,160,80,0.65);
+    transform: scale(1.10) rotate(2deg);
+    background: linear-gradient(135deg, #221508, #2A1A08);
+    box-shadow:
+        0 0  26px rgba(200,160,80,0.24),
+        0 0  55px rgba(200,160,80,0.10),
+        inset 0 1px 0 rgba(200,160,80,0.15);
+}
+
+/* ── Card Title ── */
+.feature-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 23px;
+    font-weight: 400;
+    color: #F0E8D8;
+    margin: 0 0 14px 0;
+    line-height: 1.2;
+    letter-spacing: 0.2px;
+    transition: color 0.3s ease, text-shadow 0.3s ease, letter-spacing 0.3s ease;
+}
+
+.feature-card:hover .feature-title {
+    color: #FAF2E2;
+    letter-spacing: 0.4px;
+    text-shadow: 0 0 26px rgba(200,160,80,0.16);
+}
+
+/* ── Card Description ── */
+.feature-desc {
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: #A89878;
+    line-height: 1.9;
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+.feature-card:hover .feature-desc { color: #C4B08A; }
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
+    .feature-card:nth-child(2) { border-right: none; }
+    .feature-card:nth-child(1),
+    .feature-card:nth-child(2) { border-bottom: 1px solid rgba(200,160,80,0.1); }
+    .hero-corner-tl, .hero-corner-br { display: none; }
+}
+
+@media (max-width: 768px) {
+    .hero-section     { padding: 80px 28px; }
+    .features-section { padding: 80px 28px 100px; }
+}
+
+@media (max-width: 600px) {
+    .features-grid { grid-template-columns: 1fr; }
+    .feature-card { border-right: none; border-bottom: 1px solid rgba(200,160,80,0.1); }
+    .feature-card:last-child { border-bottom: none; }
+}

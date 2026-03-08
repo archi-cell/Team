@@ -1,0 +1,197 @@
+/* ===============================
+   FestNest Footer — Luxury Dark Theme
+   =============================== */
+
+.footer {
+    background: #1A1008;
+    border-top: 1px solid rgba(200, 160, 80, 0.12);
+    padding: 72px 72px 0;
+    font-family: 'Jost', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle gold glow top-left */
+.footer::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    left: -60px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(200, 160, 80, 0.06),
+        transparent 70%
+    );
+    pointer-events: none;
+}
+
+/* ── Top row ── */
+.footer-top {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 64px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Brand block ── */
+.footer-brand {
+    padding-right: 40px;
+}
+
+.footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    line-height: 1;
+}
+
+.footer-logo-fest {
+    color: #C8A050;
+    font-style: italic;
+}
+
+.footer-logo-nest {
+    color: #F5EFE6;
+}
+
+.footer-tagline {
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: #C4B89A;
+    line-height: 1.85;
+    margin: 0;
+}
+
+/* ── Nav columns ── */
+.footer-col {
+    position: relative;
+    z-index: 1;
+}
+
+.footer-col-heading {
+    font-family: 'Jost', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #C8A050;
+    margin: 0 0 28px 0;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.footer-links a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 300;
+    color: #C4B89A;
+    text-decoration: none;
+    transition: color 0.25s ease, letter-spacing 0.25s ease;
+    display: inline-block;
+}
+
+.footer-links a:hover {
+    color: #F5EFE6;
+    letter-spacing: 0.3px;
+}
+
+/* ── Divider ── */
+.footer-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(200, 160, 80, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Bottom row ── */
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 0 32px;
+    position: relative;
+    z-index: 1;
+}
+
+.footer-copy {
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: #C4B89A;
+    opacity: 0.6;
+    margin: 0;
+    letter-spacing: 0.3px;
+}
+
+/* ── Social icons ── */
+.footer-socials {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.footer-social-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(200, 160, 80, 0.2);
+    background: transparent;
+    color: #C4B89A;
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+    cursor: pointer;
+}
+
+.footer-social-btn:hover {
+    border-color: #C8A050;
+    color: #C8A050;
+    background: rgba(200, 160, 80, 0.06);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+    .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+    .footer-brand {
+        grid-column: 1 / -1;
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer {
+        padding: 56px 24px 0;
+    }
+    .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+}

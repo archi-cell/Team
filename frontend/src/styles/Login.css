@@ -1,0 +1,327 @@
+/* ===============================
+   Global Reset — paste in index.css
+   or App.css to fix full-width layout
+   =============================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body,
+#root {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: #0F0A04;
+}
+
+
+/* ===============================
+    FestNest Login Page
+   =============================== */
+
+.login-page {
+    width: 100%;
+    min-height: 100vh;
+    background: #0F0A04;
+
+    background-image:
+        radial-gradient(ellipse at 50% 40%, rgba(200,160,80,0.10) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 90%, rgba(200,160,80,0.06) 0%, transparent 45%),
+        radial-gradient(ellipse at 15% 10%, rgba(200,160,80,0.05) 0%, transparent 40%);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-family: "Jost", sans-serif;
+    position: relative;
+    overflow: hidden;
+
+    animation: pageFadeIn 0.6s ease both;
+}
+
+@keyframes pageFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Slow breathing glow behind the card */
+.login-page::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 640px;
+    height: 640px;
+    background: radial-gradient(circle, rgba(200,160,80,0.07), transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+    animation: breathe 5s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    0%, 100% { transform: translate(-50%, -50%) scale(1);    opacity: 0.7; }
+    50%       { transform: translate(-50%, -50%) scale(1.12); opacity: 1;   }
+}
+
+/* Noise grain */
+.login-page::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.028;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ── Eyebrow ── */
+.login-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #C8A050;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+    z-index: 1;
+    animation: fadeRise 0.8s ease 0.2s both;
+}
+
+@keyframes fadeRise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Lines grow outward on load */
+.login-eyebrow::before,
+.login-eyebrow::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: #C8A050;
+    opacity: 0.4;
+    animation: lineGrow 0.9s ease 0.5s both;
+    transform-origin: center;
+}
+
+@keyframes lineGrow {
+    from { transform: scaleX(0); opacity: 0; }
+    to   { transform: scaleX(1); opacity: 0.4; }
+}
+
+/* ── Login Card ── */
+.login-card {
+    background: #2D1F0A;
+    padding: 56px 52px 52px;
+    width: min(480px, 90vw);
+
+    border-radius: 4px;
+    border: 1px solid rgba(200,160,80,0.2);
+    box-shadow:
+        0 24px 80px rgba(0,0,0,0.6),
+        0 0 0 1px rgba(200,160,80,0.04) inset;
+
+    position: relative;
+    z-index: 1;
+
+    /* Card rises with spring easing */
+    animation: cardRise 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+}
+
+@keyframes cardRise {
+    from { opacity: 0; transform: translateY(40px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+/* Gold top accent line — sweeps in left to right */
+.login-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #C8A050, transparent);
+    border-radius: 4px 4px 0 0;
+    animation: topLineSweep 1s ease 0.7s both;
+    transform-origin: left;
+}
+
+@keyframes topLineSweep {
+    from { transform: scaleX(0); opacity: 0; }
+    to   { transform: scaleX(1); opacity: 1; }
+}
+
+/* ── Heading ── */
+.login-card h2 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 38px;
+    font-weight: 300;
+    color: #F5EFE6;
+    margin-bottom: 36px;
+    text-align: center;
+    letter-spacing: 0.5px;
+    animation: fadeRise 0.7s ease 0.35s both;
+}
+
+/* ── Form ── */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    animation: fadeRise 0.7s ease 0.5s both;
+}
+
+.login-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.login-input-group label {
+    font-family: 'Jost', sans-serif;
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #C8A050;
+    transition: opacity 0.3s ease;
+}
+
+/* Label brightens when its input is focused */
+.login-input-group:focus-within label {
+    opacity: 1;
+    text-shadow: 0 0 8px rgba(200,160,80,0.3);
+}
+
+/* ── Inputs ── */
+.login-form input {
+    padding: 14px 16px;
+    border-radius: 4px;
+    border: 1px solid rgba(200,160,80,0.2);
+    background: #1A1008;
+    color: #F5EFE6;
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    width: 100%;
+}
+
+.login-form input::placeholder {
+    color: rgba(196, 184, 154, 0.35);
+}
+
+.login-form input:focus {
+    border-color: #C8A050;
+    box-shadow: 0 0 0 3px rgba(200,160,80,0.08);
+    background: #1F1508;
+}
+
+/* ── Button ── */
+.login-btn {
+    margin-top: 8px;
+    padding: 16px;
+    border: none;
+    border-radius: 2px;
+    background: #C8A050;
+    color: #0F0A04;
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 32px rgba(200,160,80,0.2);
+}
+
+/* Shimmer sweep on hover */
+.login-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(255,255,255,0.14),
+        transparent
+    );
+    transform: skewX(-20deg);
+    transition: left 0.5s ease;
+    pointer-events: none;
+}
+
+.login-btn:hover::after {
+    left: 160%;
+}
+
+.login-btn:hover {
+    background: #E8C880;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(200,160,80,0.35);
+}
+
+.login-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 16px rgba(200,160,80,0.2);
+}
+
+/* ── Register link ── */
+.login-footer-text {
+    margin-top: 24px;
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: #C4B89A;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    animation: fadeRise 0.7s ease 0.65s both;
+}
+
+.login-footer-text a {
+    color: #C8A050;
+    text-decoration: none;
+    position: relative;
+    transition: color 0.2s ease;
+}
+
+/* Underline grows on hover */
+.login-footer-text a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0%;
+    height: 1px;
+    background: #C8A050;
+    transition: width 0.3s ease;
+}
+
+.login-footer-text a:hover {
+    color: #E8C880;
+}
+
+.login-footer-text a:hover::after {
+    width: 100%;
+}

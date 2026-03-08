@@ -1,0 +1,361 @@
+/* ============================= */
+/* FESTNEST LUXURY DARK THEME   */
+/* ============================= */
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0F0A04;
+    color: #F5EFE6;
+    font-family: 'Jost', sans-serif;
+    overflow-x: hidden;
+    /* Smooth page entry */
+    animation: bodyFadeIn 0.5s ease both;
+}
+
+@keyframes bodyFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Full-page ambient drifting glow */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 25% 20%, rgba(200,160,80,0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at 78% 80%, rgba(200,160,80,0.05) 0%, transparent 45%);
+    pointer-events: none;
+    z-index: 0;
+    animation: ambientDrift 14s ease-in-out infinite alternate;
+}
+
+@keyframes ambientDrift {
+    from { transform: translate(0,    0)   scale(1);    opacity: 0.8; }
+    to   { transform: translate(35px, 20px) scale(1.05); opacity: 1;  }
+}
+
+/* Global noise grain overlay */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.028;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ── Headings ── */
+h1, h2, h3, h4, h5 {
+    font-family: 'Cormorant Garamond', serif;
+    color: #F5EFE6;
+    letter-spacing: 1px;
+    /* Each heading fades up when it appears */
+    animation: fadeRise 0.8s ease both;
+}
+
+@keyframes fadeRise {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Labels ── */
+label {
+    color: #C8A050;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 12px;
+    transition: text-shadow 0.3s ease;
+}
+
+/* Label glows when sibling input is focused */
+label:has(+ input:focus),
+label:has(+ select:focus),
+label:has(+ textarea:focus) {
+    text-shadow: 0 0 10px rgba(200,160,80,0.3);
+}
+
+/* ── Links ── */
+a {
+    color: #C8A050;
+    text-decoration: none;
+    position: relative;
+    transition: color 0.25s ease;
+}
+
+/* Underline grows from left on hover */
+a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0%;
+    height: 1px;
+    background: #C8A050;
+    transition: width 0.3s ease;
+}
+
+a:hover {
+    color: #E8C880;
+}
+
+a:hover::after {
+    width: 100%;
+}
+
+/* ============================= */
+/* BUTTONS                       */
+/* ============================= */
+
+.btn-primary {
+    background-color: #C8A050;
+    color: #0F0A04;
+    padding: 10px 20px;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 6px 24px rgba(200,160,80,0.18);
+    font-family: 'Jost', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* Shimmer sweep */
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.14), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.5s ease;
+    pointer-events: none;
+}
+
+.btn-primary:hover::after { left: 160%; }
+
+.btn-primary:hover {
+    background-color: #E8C880;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 36px rgba(200,160,80,0.32);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(200,160,80,0.18);
+}
+
+.btn-ghost {
+    background: rgba(245, 239, 230, 0.2);
+    border: 1px solid rgba(200, 160, 80, 0.4);
+    color: #F5EFE6;
+    padding: 10px 20px;
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    font-family: 'Jost', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* Ghost shimmer sweep */
+.btn-ghost::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(to right, transparent, rgba(200,160,80,0.06), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.5s ease;
+    pointer-events: none;
+}
+
+.btn-ghost:hover::after { left: 160%; }
+
+.btn-ghost:hover {
+    border-color: #C8A050;
+    color: #C8A050;
+    transform: translateY(-2px);
+}
+
+.btn-ghost:active {
+    transform: translateY(0);
+}
+
+/* ============================= */
+/* CARDS                         */
+/* ============================= */
+
+.card {
+    background-color: #2D1F0A;
+    border-radius: 4px;
+    padding: 20px;
+    border: 1px solid rgba(200,160,80,0.1);
+    box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    animation: cardRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes cardRise {
+    from { opacity: 0; transform: translateY(28px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+/* Gold top-border reveal */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #C8A050, transparent);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+/* Inner shimmer on hover */
+.card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -120%;
+    width: 70%; height: 100%;
+    background: linear-gradient(to right, transparent, rgba(200,160,80,0.04), transparent);
+    transform: skewX(-15deg);
+    transition: left 0.6s ease;
+    pointer-events: none;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(200,160,80,0.35);
+    box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 40px rgba(200,160,80,0.05);
+}
+
+.card:hover::before { opacity: 1; }
+.card:hover::after  { left: 160%; }
+
+/* ============================= */
+/* INPUTS                        */
+/* ============================= */
+
+input, select, textarea {
+    background-color: #1A1008;
+    border: 1px solid rgba(200,160,80,0.3);
+    color: #F5EFE6;
+    padding: 10px 14px;
+    border-radius: 4px;
+    outline: none;
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: rgba(196,184,154,0.35);
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #C8A050;
+    box-shadow: 0 0 0 3px rgba(200,160,80,0.08);
+    background-color: #1F1508;
+}
+
+/* ============================= */
+/* SECTION SPACING               */
+/* ============================= */
+
+.section {
+    padding: 120px 20px;
+    position: relative;
+    border-top: 1px solid rgba(200,160,80,0.06);
+    animation: sectionFadeIn 0.9s ease both;
+}
+
+@keyframes sectionFadeIn {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.section:first-of-type {
+    border-top: none;
+}
+
+/* ============================= */
+/* TABLES                        */
+/* ============================= */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #1A1008;
+    border: 1px solid rgba(200,160,80,0.08);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+th {
+    color: #C8A050;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    padding: 14px 12px;
+    background: #2D1F0A;
+    font-family: 'Jost', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(200,160,80,0.12);
+}
+
+td {
+    padding: 13px 12px;
+    border-top: 1px solid rgba(200,160,80,0.06);
+    color: #C4B89A;
+    font-size: 14px;
+    font-weight: 300;
+    transition: color 0.25s ease;
+}
+
+tr {
+    transition: background-color 0.25s ease;
+}
+
+tr:hover {
+    background-color: #3D2C12;
+}
+
+tr:hover td {
+    color: #F5EFE6;
+}
+
+/* ============================= */
+/* STATUS COLORS                 */
+/* ============================= */
+
+.success {
+    color: #3DD68C;
+    /* Soft pulse to draw attention */
+    animation: statusPulse 2.5s ease-in-out infinite;
+}
+
+.error {
+    color: #E05B5B;
+    animation: statusPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.65; }
+}

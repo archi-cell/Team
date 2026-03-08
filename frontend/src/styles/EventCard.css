@@ -1,0 +1,159 @@
+/* ===============================
+   FestNest Luxury Event Card
+   =============================== */
+
+.event-card {
+    background: #2D1F0A;
+    border: 1px solid rgba(200, 160, 80, 0.25);
+    border-radius: 4px;
+    padding: 20px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+
+    /* Spring entrance on render */
+    animation: cardRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes cardRise {
+    from { opacity: 0; transform: translateY(32px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+/* Hover Effect */
+.event-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(200, 160, 80, 0.45);
+    box-shadow: 0 32px 80px rgba(0,0,0,0.65), 0 0 48px rgba(200,160,80,0.06);
+}
+
+/* Radial Gold Glow — breathing pulse */
+.event-card::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle,
+        rgba(200, 160, 80, 0.08),
+        transparent 70%
+    );
+    pointer-events: none;
+    animation: glowBreath 5s ease-in-out infinite;
+}
+
+@keyframes glowBreath {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50%       { opacity: 1;   transform: scale(1.08); }
+}
+
+/* Gold top-border reveal on hover */
+.event-card .card-top-line {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #C8A050, transparent);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.event-card:hover .card-top-line {
+    opacity: 1;
+}
+
+/* Shimmer sweep across card on hover */
+.event-card .card-shimmer {
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(200,160,80,0.05),
+        transparent
+    );
+    transform: skewX(-15deg);
+    transition: left 0.65s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.event-card:hover .card-shimmer {
+    left: 160%;
+}
+
+/* Image Styling */
+.event-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(200, 160, 80, 0.2);
+    transition: transform 0.5s ease, filter 0.5s ease, border-color 0.4s ease;
+    filter: brightness(0.88) saturate(0.9);
+}
+
+.event-card:hover img {
+    transform: scale(1.03);
+    filter: brightness(1) saturate(1.05);
+    border-color: rgba(200, 160, 80, 0.4);
+}
+
+/* Event Title */
+.event-card h3 {
+    font-family: "Cormorant Garamond", serif;
+    color: #F5EFE6;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    transition: letter-spacing 0.3s ease;
+}
+
+.event-card:hover h3 {
+    letter-spacing: 0.3px;
+}
+
+/* Text Content */
+.event-card p {
+    font-family: "Jost", sans-serif;
+    color: #C4B89A;
+    font-size: 14px;
+    margin: 4px 0;
+    transition: color 0.3s ease;
+}
+
+.event-card:hover p {
+    color: #D4C8AA;
+}
+
+/* Highlight Important Labels */
+.event-card p strong {
+    color: #C8A050;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: text-shadow 0.3s ease;
+}
+
+.event-card:hover p strong {
+    text-shadow: 0 0 10px rgba(200,160,80,0.25);
+}
+
+/* Noise Grain Overlay */
+.event-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("https://www.transparenttextures.com/patterns/noise.png");
+    opacity: 0.03;
+    pointer-events: none;
+    border-radius: 4px;
+    z-index: 1;
+}
